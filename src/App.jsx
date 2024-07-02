@@ -5,11 +5,23 @@ import './App.css';
 
 function App() {
   const [count, setCount] = useState(0);
+  const [message, setMessage] = useState('');
 
   const fetchData = async () => {
     try {
-      const response = await fetch(`http://35.160.120.126/hello`);
-      const data = await response.json();
+      const response = await fetch('http://localhost:8080/hello');
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const data = await response.text(); // Use response.text() for plain text response
+
+      // Show data in a popup
+      window.alert(data);
+
+      // Alternatively, use a modal library like react-modal
+      // Example: https://www.npmjs.com/package/react-modal
+
+      setMessage(data); // Update the state with the fetched data
       console.log(data);
     } catch (error) {
       console.error('Error fetching data:', error);
@@ -37,6 +49,7 @@ function App() {
         <button onClick={fetchData}>
           Fetch Data
         </button>
+        {/* Remove rendering message directly */}
       </div>
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
