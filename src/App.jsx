@@ -9,7 +9,7 @@ function App() {
 
   const fetchData = async () => {
     try {
-      const response = await fetch('http://localhost:8080/hello');
+      const response = await fetch('https://test-3-4svx.onrender.com/hello');
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
